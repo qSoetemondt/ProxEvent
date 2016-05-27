@@ -2,29 +2,45 @@
 	Logique de géolocalisation
   ==============================*/
 
-// data storage over page refresh
-// Check if "key" exists in the storage
-		var value = $.jStorage.get("key");
-		if(!value){
-		    // if not - load the data from the server
-		    // value = load_data_from_server()
-		    // and save it
-		    $.jStorage.set("key","coucou");
-		}
-console.log(value);
+
+/**
+ * Gère l'état pour un nouvel évènement créé
+ */ 
+var newEventStatus = $.jStorage.get("key");
+// Si l'objet n'existe pas on l'initialise
+if(!newEventStatus) {
+    newEventStatus = $.jStorage.set("key","");
+}
 
 
+/* au chargement complet de la page */
 $(document).ready(function() {
 
+	/**
+	 * Gère l'affichage du message d'ajout d'évènement
+	 */
+	// lecture de la valeur :
+	console.log(newEventStatus);
+	$('#msgAddEventId').text(newEventStatus);
+	$('#msgAddEventId').hide().toggle(500);
+	$('#msgAddEventId').show().toggle(5000);
+	// puis reset de  celle-ci :
+	$.jStorage.set("key","");
+
+
+
+	/**
+ 	 * Génère le menu des catégories
+ 	 * à partir du flux json des categories
+ 	 * - filtrage par checkbox
+ 	 */
 	$.ajax({
 		url: '/api/categories',
 		type: 'GET',
 		dataType: 'json',
-
 	})
 	.done(function(json) {
 		console.log(json);
-
 		$(json).each(function(index, el) {
 			if($(json)[index]['parent_id'] == 0)
 			{
@@ -44,7 +60,6 @@ $(document).ready(function() {
 				$('#triCategorieId').append($div_checkbox);
 			}
 		});
-
 	})
 	.fail(function(error) {
 		console.log(error);
@@ -54,25 +69,30 @@ $(document).ready(function() {
 	});
 
 
-	/*
-		Récupération des références sur les objets
-	*/
-	var $zoneError = $('#mapError'); // ciblage pour la zone des erreurs
-	var $zoneMap = $('#mapOk'); // ciblage de la zone de la carte
+	/**
+	 * Récupération des références sur les objets
+	 * ciblages :
+	 * - de la zone des erreurs
+	 * - de la zone de la carte
+	 */
+	var $zoneError = $('#mapError');
+	var $zoneMap = $('#mapOk');
 
-	/*
-		État initial des objets
-	*/
-	$zoneMap.show(); // afficher la zone de la carte
+	/**
+	 * État initial des objets
+	 * la carte zone de carte est affichée par défaut
+	 */
+	$zoneMap.show();
 	$zoneError.hide();
 
-	/*
-		Initialise une carte selon l'API Google
-	*/
+
+	/**
+	 * Initialise une carte selon l'API Google
+	 */
 	var initGoogleMap = function(latitude, longitude) {
 
-		// latitude et longitude fournies
-		// par l'API HTML5 Geolocation du navigateur
+		/* latitude et longitude fournies */
+		/* par l'API HTML5 Geolocation du navigateur */
 		var localCoords = {
 			lat: latitude,
 			lng: longitude
@@ -82,8 +102,8 @@ $(document).ready(function() {
 		var map = new google.maps.Map($zoneMap[0], {
 			zoom: 15,
 			center: localCoords,
-			disableDefaultUI : true, // masque l'interface par défaut de Google
-			mapTypeId: google.maps.MapTypeId.ROADMAP // affichage graphique par défaut
+			disableDefaultUI : true, 
+			mapTypeId: google.maps.MapTypeId.ROADMAP
 		});
 
 		// marqueur des coordonnées locales
@@ -100,17 +120,16 @@ $(document).ready(function() {
 		var gmarkers = [];
 
 
-		// ************************************************
-		// Chargement des événements ciblés, par appel AJAX
+		/**
+		 * Chargement des événements ciblés, par appel AJAX
+		 */
 		$.ajax({
 			url: '/api/events',
 			type: 'GET',
 			dataType: 'json',
-			// data: {param1: 'value1'},
 		})
 		.done(function(json) {
 			// console.log(json);
-
 			$(json).each(function(index, el) {
 
 				$latitude = $(json)[index]['latitude'];
@@ -136,14 +155,14 @@ $(document).ready(function() {
 					lng: $longitude		//2.3342411518096924
 				};
 
-				// Gestion des icônes pour les sous-catégories (id>8) :
-				// attribution de l'id de catégorie parent
+				/**
+				 * Gère les icônes pour les catégories
+				 * et les sous-catégories (par le parent_id)
+				 */
 				if ($categorieEvent > 8) {
 					$categorieEvent = $(json)[index]['parent_id'];
 				}
-
-
-				// Association numéro de catégorie <=> icône 
+				/* Association numéro de catégorie <=> icône */
 				var icons = {
 					'1': 'icomoon-glass.png',
 					'2': 'icomoon-music.png',
@@ -154,13 +173,10 @@ $(document).ready(function() {
 					'7': 'icomoon-fire.png',
 					'8': 'linecons-vynil.png',
 				};
-				// Gestion des icônes pour les sous-catégories (id>8) :
-				// attribution de l'id de catégorie parent
-				if ($categorieEvent > 8) {
-					$categorieEvent = $(json)[index]['parent_id'];
-				}
 
-				// marqueur des coordonnées locales pour chaque event
+				/**
+				 * Gère le marqueur de chaque évènement
+				 */
 				var marker = new google.maps.Marker({
 					position: $eventCoords,
 					map: map,
@@ -182,8 +198,10 @@ $(document).ready(function() {
 					for( var i=0; i<gmarkers.length; i++ ){
 						if (gmarkers[i].mycategory == category) {
 							gmarkers[i].setVisible(true);
+							// gmarkers[i]['zIndex'] = i;
 					    }
 					}
+					console.log(gmarkers);
 				}
 				// fonction pour cacher les marqueurs en fonction des catégories choisies dans les checkbox (home.php)
 				function hide(category) {
@@ -238,6 +256,7 @@ $(document).ready(function() {
 								$form = "<form method='POST' action=''><input type='hidden' name='plusun' value='"+$(json)[index]['id']+"'><button type='submit' name='submit' style='margin-left:5px'><span class='glyphicon glyphicon-thumbs-up'></span></button></form></p><br>";
 							}
 						}
+
 					}
 				}
 
@@ -302,17 +321,17 @@ $(document).ready(function() {
 				google.maps.event.addListener(marker, 'click', function(){
 					if(!infoBulle){
 						infoBulle = new google.maps.InfoWindow({
-							content: contenuInfoBulle,
-							shadowStyle: 1,
-							padding: 0,
-							backgroundColor: 'rgb(57,57,57)',
-							borderRadius: 4,
-							arrowSize: 10,
-							borderWidth: 1,
-							borderColor: '#2c2c2c',
-							disableAutoPan: true,
-							hideCloseButton: true,
-							arrowPosition: 30,
+												content: contenuInfoBulle,
+												shadowStyle: 1,
+												padding: 0,
+												backgroundColor: 'rgb(57,57,57)',
+												borderRadius: 4,
+												arrowSize: 10,
+												borderWidth: 1,
+												borderColor: '#2c2c2c',
+												disableAutoPan: true,
+												hideCloseButton: true,
+												arrowPosition: 30,
 
 						})
 

@@ -3,12 +3,10 @@
 	$w_routes = array(
 
 		['GET|POST', '/', 'Default#home', 'home'],
-		// Route user
+
 		['GET|POST','/inscription', 'User#inscription', 'inscription'],
 		['GET|POST','/login', 'User#login', 'login'],
 		['GET|POST','/logout', 'User#logout', 'logout'],
-		['GET|POST', '/oublie', 'User#oublie', 'oublie'],
-		['GET|POST', '/reinit/[:id]/[:token]', 'User#reinit', 'reinit'],
 
 		// route vers le fichier json des catégories
 		['GET|POST', '/api/categories', 'Api#categories', 'apiCategories'],

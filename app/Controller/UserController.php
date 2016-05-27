@@ -5,11 +5,8 @@ namespace Controller;
 
 use \W\Controller\Controller;
 use \Manager\PostManager;
-use \Manager\mdpManager;
 use \W\Manager\UserManager;
 use \W\Security\AuthentificationManager;
-
-
 
 class UserController extends Controller
 {
@@ -19,11 +16,11 @@ class UserController extends Controller
         if(isset($_POST['submit'])){
             if($_POST['myForm']['username'] == ""){
                 $errors['login'] = "Le champ login est vide";
-            }elseif(preg_match('/[a-zA-Z0-9]{3,20}/' , $_POST['myForm']['username']) == false){
+            }elseif(preg_match('/[a-zA-Z0-9\_\-\@]{3,20}/' , $_POST['myForm']['username']) == false){
                 $errors['login'] = "Le champ login ne respecte pas les conditions (3-20 caractère)";
             }elseif($_POST['myForm']['password'] == ""){
                 $errors['mdp'] = "Le champ mot de passe est vide";
-            }elseif(preg_match('/[a-zA-Z0-9]{5,32}/',$_POST['myForm']['password']) == false){
+            }elseif(preg_match('/[a-zA-Z0-9\_\-\@]{5,32}/',$_POST['myForm']['password']) == false){
                 $errors['mdp'] = "Le champ mot de passe ne respecte pas les conditions (5 à 32 caractère alphanumérique)";
             }elseif($_POST['myForm']['email'] == ""){
                 $errors['email'] = "Le champ email est vide";
@@ -76,6 +73,7 @@ class UserController extends Controller
     
     public function oublie()
     {
+
         $errors = [];
         if(isset($_POST['reinit'])){
             if($_POST['email'] == ""){
@@ -132,6 +130,12 @@ class UserController extends Controller
             if($_POST['conf_mot_de_passe'] == "" && $_POST['mot_de_passe'] == "" ){
                 $errors['mdp'] = 'Les champs sont vides';
             }
+            
+            // vérifier le bon format
+            if(preg_match('/[a-zA-Z0-9\_\-\@]5,32}/' , $_POST['mot_de_passe']) == false) {
+                $errors['mdp'] = 'Le mot de passe ne respecte pas le bon format.';
+            }
+            
             // vérifier si mdp et mdf conf <>
             if($_POST['conf_mot_de_passe'] != $_POST['mot_de_passe']){
                     $errors['mdp'] = "Les mot de passe ne sont pas identiques";
@@ -149,7 +153,7 @@ class UserController extends Controller
     
     
     
-     
+    
 }
         
     
