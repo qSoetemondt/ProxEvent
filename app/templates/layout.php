@@ -27,24 +27,13 @@
 
 <body>
 
-	<!-- Gestion du menu Bootstrap -->
 	<nav class="navbar navbar-default navbar-fixed-bottom ourMenu">
 	  <div class="container-fluid">
-
 	    <div class="navbar-header">
-		    <button type="button" class="navbar-toggle collapsed pull-left" data-toggle="collapse" data-target="#bs-navbar-collapse-1" aria-expanded="false" id="burgerId">
-		      	<span class="sr-only">Toggle navigation</span>
-	        	<span class="icon-bar"></span>
-	        	<span class="icon-bar"></span>
-	        	<span class="icon-bar"></span>
-	      	</button>
-      	</div>
-
-		<div class="collapse navbar-collapse ourBurgerMenu" id="bs-navbar-collapse-1">
-			<ul class="nav navbar-nav">
+			<ul class="nav navbar-nav navbar-right">
 				<li>
 					<a href="<?= $this->url('home')?>">
-						<button type="button" class="btn  btn-primary btn-menu">Accueil</button>
+						<button type="button" class="btn btn-default btn-menu">Accueil</button>
 					</a>
 				</li>
 				<?php
@@ -53,12 +42,12 @@
 				?>
 			  		<li>
 			  			<a href="<?= $this->url('inscription')?>">
-			  				<button type="button" class="btn  btn-primary btn-menu">Inscription</button>
+			  				<button type="button" class="btn btn-default btn-menu">Inscription</button>
 			  			</a>
 			  		</li>
 			  		<li>
 			  			<a href="<?= $this->url('login')?>">
-			  				<button type="button" class="btn  btn-primary btn-menu">Login</button>
+			  				<button type="button" class="btn btn-default btn-menu">Login</button>
 			  			</a>
 			  		</li>
 		 		<?php
@@ -68,12 +57,12 @@
 		 		?>
 					<li>
 						<a href="<?= $this->url('logout')?>">
-							<button type="button" class="btn btn-primary btn-menu">Déconnexion</button>
+							<button type="button" class="btn btn-default btn-menu">Déconnexion</button>
 						</a>
 					</li>
 					<li>
 						<a href="<?= $this->url('addEvent')?>">
-							<button  type="button" class="btn btn-primary btn-menu">Ajout Evénement</button>
+							<button  type="button" class="btn btn-default btn-menu">Ajout Evénement</button>
 						</a>
 					</li>
 				<?php
