@@ -5,6 +5,7 @@
 
 /**
  * Gère l'état pour un nouvel évènement créé
+ * par un objet qui résiste au rafraîchissement de page
  */ 
 var newEventStatus = $.jStorage.get("key");
 // Si l'objet n'existe pas on l'initialise
@@ -17,15 +18,16 @@ if(!newEventStatus) {
 $(document).ready(function() {
 
 	/**
-	 * Gère l'affichage du message d'ajout d'évènement
+	 * Gère les informations pour l'évènement créé
 	 */
-	// lecture de la valeur :
-	console.log(newEventStatus);
-	$('#msgAddEventId').text(newEventStatus);
-	$('#msgAddEventId').hide().toggle(500);
-	$('#msgAddEventId').show().toggle(5000);
-	// puis reset de  celle-ci :
-	$.jStorage.set("key","");
+	if(newEventStatus) {
+		// Gère l'affichage du message à l'écran
+		$('#msgAddEventId').text(newEventStatus);
+		$('#msgAddEventId').hide().toggle(500);
+		$('#msgAddEventId').show().toggle(5000);
+		// on vide la valeur après affichage
+		$.jStorage.set("key","");
+	}
 
 
 
