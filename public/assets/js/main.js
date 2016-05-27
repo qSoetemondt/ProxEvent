@@ -238,6 +238,7 @@ $(document).ready(function() {
 								$form = "<form method='POST' action=''><input type='hidden' name='plusun' value='"+$(json)[index]['id']+"'><button type='submit' name='submit' style='margin-left:5px'><span class='glyphicon glyphicon-thumbs-up'></span></button></form></p><br>";
 							}
 						}
+
 					}
 				}
 
@@ -302,17 +303,17 @@ $(document).ready(function() {
 				google.maps.event.addListener(marker, 'click', function(){
 					if(!infoBulle){
 						infoBulle = new google.maps.InfoWindow({
-							content: contenuInfoBulle,
-							shadowStyle: 1,
-							padding: 0,
-							backgroundColor: 'rgb(57,57,57)',
-							borderRadius: 4,
-							arrowSize: 10,
-							borderWidth: 1,
-							borderColor: '#2c2c2c',
-							disableAutoPan: true,
-							hideCloseButton: true,
-							arrowPosition: 30,
+												content: contenuInfoBulle,
+												shadowStyle: 1,
+												padding: 0,
+												backgroundColor: 'rgb(57,57,57)',
+												borderRadius: 4,
+												arrowSize: 10,
+												borderWidth: 1,
+												borderColor: '#2c2c2c',
+												disableAutoPan: true,
+												hideCloseButton: true,
+												arrowPosition: 30,
 
 						})
 

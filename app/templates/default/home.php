@@ -4,6 +4,7 @@
 
 	<!-- checkbox de tri des évènements par catégorie(s) -->
 	<div id="triCategorieId">
+		
 	</div>
 
 	<!-- Appel Google map -->
