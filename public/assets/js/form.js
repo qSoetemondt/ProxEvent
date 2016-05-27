@@ -388,8 +388,9 @@ $(document).ready(function() {
 	 * Gère la persistance d'info à la soumission du formulaire
 	 */
 	$('#btnFormEvent').click(function(event) {
-		var newEventStatus = $.jStorage.set("key","nouvel évènement créé avec succès");
-	    console.log(newEventStatus);
+		if(!$.jStorage.get("key")) {
+			$.jStorage.set("key","nouvel évènement créé avec succès");
+		}
 	});
 
 });

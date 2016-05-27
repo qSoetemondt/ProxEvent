@@ -4,15 +4,13 @@
 
 
 /**
- * Gère la mise en évidence d'un nouvel évènement créé
- */
-// message de confirmation
+ * Gère l'état pour un nouvel évènement créé
+ */ 
 var newEventStatus = $.jStorage.get("key");
-// récupère latitude et longitude
-var newEventCoords = [
-	'lat': $.jStorage.get("lat"),
-	'lng': $.jStorage.get("lng")
-];
+// Si l'objet n'existe pas on l'initialise
+if(!newEventStatus) {
+    newEventStatus = $.jStorage.set("key","");
+}
 
 
 /* au chargement complet de la page */
@@ -24,6 +22,8 @@ $(document).ready(function() {
 	// lecture de la valeur :
 	console.log(newEventStatus);
 	$('#msgAddEventId').text(newEventStatus);
+	$('#msgAddEventId').hide().toggle(500);
+	$('#msgAddEventId').show().toggle(5000);
 	// puis reset de  celle-ci :
 	$.jStorage.set("key","");
 
