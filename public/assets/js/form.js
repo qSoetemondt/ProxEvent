@@ -384,15 +384,12 @@ $(document).ready(function() {
 		});
 	});
 
-	// Gestion de la persistance d'info à la soumission du formulaire
-	$('#btnFromEvent').click(function(e) {
-				var value = $.jStorage.get("key");
-		if(!value){
-		    // if not - load the data from the server
-		    // value = load_data_from_server()
-		    // and save it
-		    $.jStorage.set("key","me revoila");
-		}
+	/**
+	 * Gère la persistance d'info à la soumission du formulaire
+	 */
+	$('#btnFormEvent').click(function(event) {
+		var newEventStatus = $.jStorage.set("key","nouvel évènement créé avec succès");
+	    console.log(newEventStatus);
 	});
 
 });

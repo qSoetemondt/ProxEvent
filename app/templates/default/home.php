@@ -7,6 +7,7 @@
 		
 	</div>
 
+	<div id="msgAddEventId"></div>
 	<!-- Appel Google map -->
 	<div id="mapOk"></div>
 	<!-- zone d'erreur -->
