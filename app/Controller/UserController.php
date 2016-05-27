@@ -5,11 +5,8 @@ namespace Controller;
 
 use \W\Controller\Controller;
 use \Manager\PostManager;
-use \Manager\mdpManager;
 use \W\Manager\UserManager;
 use \W\Security\AuthentificationManager;
-
-
 
 class UserController extends Controller
 {
@@ -76,6 +73,7 @@ class UserController extends Controller
     
     public function oublie()
     {
+
         $errors = [];
         if(isset($_POST['reinit'])){
             if($_POST['email'] == ""){
@@ -155,7 +153,7 @@ class UserController extends Controller
     
     
     
-     
+    
 }
         
     

@@ -5,7 +5,7 @@
 <?php $this->start('main_content') ?>
 <form method="POST">
 <div class="row">
-    <div class="col-md-offset-3 col-md-3">
+    <div class="col-md-offset-2 col-md-3">
         <div class="form-group">
             <label for="Prenom">Pseudo</label>
             <input type="text" class="form-control" id="pseudo" placeholder="Pseudo" name="myForm[username]" value="<?= (isset($_POST['myForm']['username']))?$_POST['myForm']['username']:''?>">
@@ -16,7 +16,7 @@
         </div>
     </div>
 
-    <div class="col-md-offset-1 col-md-2">
+    <div class="col-md-offset-1 col-md-3">
         <div class="form-group">
             <label for="Password">Mot de passe</label>
             <input type="password" class="form-control" id="password" placeholder="Mot de passe" name="myForm[password]" value="<?= (isset($_POST['myForm']['password']))?$_POST['myForm']['password']:''?>">
@@ -28,7 +28,7 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-md-offset-3 col-md-6">
+    <div class="col-md-offset-2 col-md-7">
         <div class="form-group">
             <label for="Email">Email</label>
             <input type="text" class="form-control" id="email" placeholder="email" name="myForm[email]" value="<?= (isset($_POST['myForm']['email']))?$_POST['myForm']['email']:''?>">
