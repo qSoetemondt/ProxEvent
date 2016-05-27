@@ -3,17 +3,19 @@
 	$w_routes = array(
 
 		['GET|POST', '/', 'Default#home', 'home'],
-
+		// Route user
 		['GET|POST','/inscription', 'User#inscription', 'inscription'],
 		['GET|POST','/login', 'User#login', 'login'],
 		['GET|POST','/logout', 'User#logout', 'logout'],
+		['GET|POST', '/oublie', 'User#oublie', 'oublie'],
+		['GET|POST', '/reinit/[:id]/[:token]', 'User#reinit', 'reinit'],
 
 		// route vers le fichier json des catégories
 		['GET|POST', '/api/categories', 'Api#categories', 'apiCategories'],
 
 		// route vers le fichier json des événements
 		['GET', '/api/events', 'Api#apiEvent', 'apiEvent'],
-		['GET|POST','/oublie', 'User#oublie', 'oublie'],
+		
 
 
 		// Route vers le form d'ajout d'événement

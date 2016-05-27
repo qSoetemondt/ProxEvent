@@ -5,8 +5,11 @@ namespace Controller;
 
 use \W\Controller\Controller;
 use \Manager\PostManager;
+use \Manager\mdpManager;
 use \W\Manager\UserManager;
 use \W\Security\AuthentificationManager;
+
+
 
 class UserController extends Controller
 {
@@ -73,13 +76,80 @@ class UserController extends Controller
     
     public function oublie()
     {
+        $errors = [];
+        if(isset($_POST['reinit'])){
+            if($_POST['email'] == ""){
+                $errors['email'] = "Le champ email est vide";
+            }elseif(preg_match('/^(([a-zA-Z]|[0-9])|([-]|[_]|[.]))+[@](([a-zA-Z0-9])|([-])){2,63}[.](([a-zA-Z0-9]){2,63})+$/', $_POST['email']) == false){
+                $errors['email'] = "Merci de rentrer une adresse valide (exemple@exemple.com)";
+            }else{
+            if(!$errors){
+                $m = new mdpManager();
+                $r = $m->token();
+                
+                $mailTo = $_POST['email'];
+                $mail             = new \PHPMailer();
+
+                $body             = "<a href=\"http://127.0.0.1/reinit/" . $r['user']['id'] . "/" . $r['token'] . "\">lien</a>";
+                    
+                $mail->IsSMTP();
+                $mail->SMTPAuth   = true;
+                $mail->Host       = "mail.qsoetemondt.com";  
+                $mail->Port       = 25;          
+                $mail->Username   = "geek_e_school@qsoetemondt.com";
+                $mail->Password   = "Rjne7%41";        
+                $mail->From       = "geek_e_school@qsoetemondt.com"; //adresse d’envoi correspondant au login entprécédement
+                $mail->FromName   = "Geek_e_school"; // nom qui sera affiché
+                $mail->Subject    = "Mot de passe perdu"; // sujet
+                $mail->Body       = "";
+                $mail->AltBody    = "Voici le lien pour réinitialiser votre mot de passe : ".$body; //Bau format te
+                $mail->WordWrap   = 50; // nombre de caractere pour le retour a la ligne automatique
+                $mail->MsgHTML($body);
+                    
+                $mail->AddReplyTo("geek_e_school@qsoetemondt.com","Geek_e_school");
+                            // piéce jointe si besoin
+                $mail->AddAddress("$mailTo");
+                $mail->IsHTML(true); // envoyer au format html, passer a false si en mode texte
+                    
+                if(!$mail->Send()) {
+                    echo "Mailer Error: " . $mail->ErrorInfo;
+                }else {
+                    echo "Le message à bien été envoyé";
+                }
+                $this->redirectToRoute('home');  
+            } 
+           
+       
+            }  
+        }
+        $this->show('default/oublie',['errors' => $errors]);
+    }
+    public function reinit($id,$token)
+    {
+        $errors = [];
+        if(isset($_POST['changement'])){
+            // vérifier si champs vides
+            if($_POST['conf_mot_de_passe'] == "" && $_POST['mot_de_passe'] == "" ){
+                $errors['mdp'] = 'Les champs sont vides';
+            }
+            // vérifier si mdp et mdf conf <>
+            if($_POST['conf_mot_de_passe'] != $_POST['mot_de_passe']){
+                    $errors['mdp'] = "Les mot de passe ne sont pas identiques";
+            }
+             if(!$errors){
+                $m = new mdpManager();
+                $m->reinit();
+                $this->redirectToRoute('login');
+            }   
+        }
+        $this->show('default/reinit', ['errors' => $errors]);
         
     }
     
     
     
     
-    
+     
 }
         
     

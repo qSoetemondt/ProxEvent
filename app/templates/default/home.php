@@ -4,7 +4,6 @@
 
 	<!-- checkbox de tri des évènements par catégorie(s) -->
 	<div id="triCategorieId">
-		
 	</div>
 
 	<div id="msgAddEventId"></div>

@@ -10,7 +10,9 @@
         "ircmaxell/random-lib": "^1.1",
         "ircmaxell/password-compat": "^1.0",
         "league/url": "^3.3",
-        "phpmailer/phpmailer": "^5.2"
+        "phpmailer/phpmailer": "^5.2",
+        "league/oauth2-google": "^1.0",
+        "league/oauth2-client": "^1.4"
     },
     "autoload": {
         "psr-4": {
