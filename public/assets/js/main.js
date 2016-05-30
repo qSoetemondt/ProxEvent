@@ -23,7 +23,8 @@ if(!newEventStatus) {
 $(document).ready(function() {
 
 	/**
-	 * Gère les informations pour l'évènement créé
+	 * Gère les informations d'un évènement
+	 * si l'on arrive du formulaire d'ajout évènement
 	 */
 	if(newEventStatus) {
 		// Gère l'affichage du message à l'écran
@@ -33,7 +34,6 @@ $(document).ready(function() {
 		// on vide la valeur après affichage
 		$.jStorage.set("key","");
 	}
-
 
 
 	/**
