@@ -102,13 +102,13 @@ class EventManager extends \W\Manager\Manager
 
 	/**
 	 * Récupère les informations du dernier évènement crée par un utilisateur connecté
+	 * lastInsertId()
 	 */
-	public function getEventByUser() {
+	public function getLastEventByUser($lastInsertId) {
 		// SELECT "la ligne d'info" FROM events WHERE user_id like "utilisateur connecté"
-		$sql = "SELECT e.*, c.libelle, c.parent_id FROM events as e, categories AS c WHERE ((date_debut >= :now AND date_debut <= :now_plus_2h) OR (date_debut<=:now AND date_fin >=:now)) AND e.categorie_id = c.id";
+		$sql = "SELECT e.*, c.libelle, c.parent_id FROM events as e, categories AS c WHERE e.id = :lastEventId";
 		$stmt = $this->dbh->prepare($sql);
-		$stmt->bindValue(":now", $current);
-		$stmt->bindValue(":now_plus_2h", $time_limite_debut);
+		$stmt->bindValue(":lastEventId", $lastInsertId);
 		$stmt->execute();
 		return $stmt->fetchAll();
 	}
