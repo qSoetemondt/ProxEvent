@@ -13,7 +13,7 @@
 
 		// route vers le fichier json des événements
 		['GET', '/api/events', 'Api#apiEvent', 'apiEvent'],
-		['GET|POST','/oublie', 'User#oublie', 'oublie'],
+
 
 
 		// Route vers le form d'ajout d'événement
@@ -21,6 +21,9 @@
 
 		//Route vers une sous catégorie en fonction d'une catégorie parent
 		['GET|POST', '/api/subcategories/[:id]', 'Api#subCategories', 'apiSubCategories'],
+
+		// Route vers l'API d'ajout d'événement :
+		['POST', '/api/addevent/[:id_user]/[:titre]/[:adresse]/[:latitude]/[:longitude]/[:categorie_id]/[:date_debut]/[:date_fin]/[:payant]/[:description]', 'API#insertNewEvent', 'ApiAddEvent']
 
 
 	);

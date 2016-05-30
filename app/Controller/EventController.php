@@ -5,7 +5,6 @@ use \W\Controller\Controller;
 
 class EventController extends Controller
 {
-
 	public function insertNewEvent()
 	{
 		$erreur = "";
