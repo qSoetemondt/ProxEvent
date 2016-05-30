@@ -8,7 +8,13 @@ a:hover {
 }
 
 h1 {
-	color: #F92672;
+  text-align: center;
+  padding-top: 0;
+  margin: 0;
+  line-height: 1.7em;
+  font-weight: bold;
+  color: #FFF;
+  background-color: rgba(144, 202, 249, 0.75);
 }
 
 h2 {
@@ -22,7 +28,6 @@ body > .container{
   width: 100%;
   margin: 0;
 }
-
 
 html {
   position: relative;
@@ -47,6 +52,7 @@ body {
 }
 
 /* TEST OFF */
+
 body > .container {
   padding: 60px 15px 0;
 }
@@ -69,7 +75,7 @@ code {
 
 
 /* ====================
-    Carte
+          Carte
    ==================== */
 
 /*
@@ -101,7 +107,6 @@ section>#mapOk {
 }
 
 
-
 /* ====================
     Infos & menus page
    ==================== */
@@ -124,36 +129,108 @@ footer {
     box-shadow: 3px 4px 5px #888888;
 }
 
+#burgerId{
+  background: #90CAF9;
+  margin-left: 0.9em;
+}
+
+/* Couleur du burger menu */
+.navbar-default .navbar-toggle .icon-bar {
+    background-color: #fff;
+}
+
+
+
+/*
+* Gestion des labels des checkbox de filtrage d'évènement 
+*/
+
+#navbarTriEventId{
+  text-align: center;
+}
+
+#navBurgerTri {
+  text-align: center;
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0);
+  margin-bottom: 0px;
+  border-width: 0px;
+}
+
+input[type=checkbox]:checked + label {
+  color: #FFF;
+  background-color: #0091EA;
+  border-radius: 5px;
+  padding: 0 10px;
+  box-shadow: 4px 4px 5px #BDBDBD;
+  opacity: 0.9;
+}
+
+input[type=checkbox] + label {
+  color: #FFF;
+  background-color: #0091EA;
+  border-radius: 5px;
+  padding: 0 10px;
+  box-shadow: 4px 4px 5px #BDBDBD;
+  opacity: 0.4;
+}
+
+input[type=checkbox] {
+  display: none;
+}
+
+label.triEventByCategory:hover {
+  background-color: #00B0FF;
+}
+
+input[type=checkbox]:checked + label:hover{
+    background-color: #00B0FF;
+}
+
+
+/* 
+* Style du bouton burger menu pour le tri des évènements par catégorie 
+*/
+
+#burgerTriId {
+  background: #90CAF9;
+  margin-left: 0.9em;
+  border: 0;
+}
+
+#triCategorieId {  
+  display: block;   
+  /*position: absolute;*/
+  text-align: center;
+  
+  height: 40px;
+  width: 100%;
+
+  line-height: 40px;
+  padding: 0;
+}
+
+li.checkbox-inline{
+    text-align: center;
+    /*margin-left: 10px;
+    padding: 0;
+    width: 30%;*/
+  }
+
 /* ==========================
    Style Form Ajout Evenement
    ========================== */
 
-h1 {
-  text-align: center;
-  margin-top: 0.15em;
-}
-
-
 #formEventId{
   margin: 0 auto;
-  width: 90%;
-
   margin-top: 50px;
   padding-top: 20px;
 
   width: 80%;
 }
 
-#triCategorieId {
-  text-align: center;
-
-
-}
-
-.focused {
-  background-color: #0277BD;
-  border-radius: 5px;
-}
+/* Gestion du style des labels et des icônes 
+ dans le formulaire d'ajout d'évènement */
 
 input[type=radio]:checked + span {
   color: #fff;
@@ -222,3 +299,51 @@ label{
   display: none;
 }
 
+
+/*  Breakpoint à 767px  */
+
+/* 
+* Gestion pour les tablettes
+  et devices plus petits 
+*/
+@media screen and (max-width: 767px) {
+  /* gestion du menu */
+  li{
+    text-align: center;
+  }
+
+  li.checkbox-inline{
+    text-align: left;
+    margin-left: 10px;
+    padding: 0;
+    width: 30%;
+  }
+
+  #triCategorieId{
+    background-color: rgba(0,0,0,0);
+  }
+
+
+  #formEventId{
+    padding-bottom: 3em;
+  }
+
+  .ourBurgerMenu{
+    background: rgba(144, 202, 249, 0.75);
+  }
+
+  .btn-menu{
+    width: 100%;
+  }
+
+  /*
+    Gestion des labels dans le form addevent :
+    afin de conserver une homogénéité de présentation
+    (tous les labels se mettent sous les icones, en dessous de 768 px)
+  */
+  .glyphicon{
+    display: block;
+  }
+
+
+}

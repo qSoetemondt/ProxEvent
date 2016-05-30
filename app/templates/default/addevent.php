@@ -9,13 +9,11 @@
 		<!-- Div de rangement des catégories -->
 		<div class="form-group" id="rangeCategId">
 			<h2>Type d'événement</h2>
-			<?php if (isset($erreur)){ echo $erreur;} ?>
+			<?php if (isset($erreur)){ echo $erreur; } ?>
 		</div>
-
 		<!-- Apparition des sous catégories : -->
 		<div class="form-group" id="rangeSubCategId">
 		</div>
-
 		<!-- Caractère payant ou non : -->
 		<div class="form-group">
 			<label for="selGratuitId" class="col-sm-2 control-label">Entrée</label>
@@ -26,7 +24,6 @@
 				</select>
 			</div>
 		</div>
-
 		<!-- implémentation des champs facultatifs -->
 		<div id="facultatifForm">
 			<!-- Champ Titre -->

@@ -10,7 +10,7 @@
 
 	<!-- Appel de la CSS reset -->
 	<!-- <link rel="stylesheet" href="<?= $this->assetUrl('css/normalize.css')?>"> -->
-
+	
 	<!-- Appel des CSS de datepicker -->
 	<link rel="stylesheet" href="<?= $this->assetUrl('css/default.css')?>">
 	<link rel="stylesheet" href="<?= $this->assetUrl('css/default.date.css')?>">
@@ -29,8 +29,20 @@
 
 	<nav class="navbar navbar-default navbar-fixed-bottom ourMenu">
 	  <div class="container-fluid">
+
+
 	    <div class="navbar-header">
-			<ul class="nav navbar-nav navbar-right">
+		    <button type="button" class="navbar-toggle collapsed pull-left" data-toggle="collapse" data-target="#bs-navbar-collapse-1" aria-expanded="false" id="burgerId">
+		      	<span class="sr-only">Toggle navigation</span>
+	        	<span class="icon-bar"></span>
+	        	<span class="icon-bar"></span>
+	        	<span class="icon-bar"></span>
+	      	</button>
+      	</div>
+
+		<div class="collapse navbar-collapse ourBurgerMenu" id="bs-navbar-collapse-1">
+			<ul class="nav navbar-nav">
+
 				<li>
 					<a href="<?= $this->url('home')?>">
 						<button type="button" class="btn btn-default btn-menu">Accueil</button>
@@ -68,10 +80,12 @@
 				<?php
 				}
 				?>
-			</ul>
+			</ul>		
 	    </div>
 	  </div>
 	</nav>
+
+	
 
 
 	<div class="contents">
@@ -94,6 +108,7 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 
 	<!-- Chargement de l'API Google Maps -->
+
 	<script src="https://maps.googleapis.com/maps/api/js?libraries=places&language=fr&key=AIzaSyAGNXG4UdnErAn4jfJ2lgwZ0OEGbT-6lws"></script>
 
 	<!-- === SCRIPTS CUSTOM JS === -->
@@ -101,6 +116,7 @@
 	<script src="<?= $this->assetUrl('js/jstorage.js') ?>"></script>
 	
 	<!-- Appel des scripts spécifiques -->
+
 	<?= $this->section('scripts') ?>
 
 </body>

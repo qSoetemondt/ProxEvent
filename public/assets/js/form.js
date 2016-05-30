@@ -1,11 +1,10 @@
 $(document).ready(function() {
 
-	//*************************************************************
-	// Gestion du passage de la géoloc au formulaire :
-
+	/* ===============================================
+		Gestion du passage de la géoloc au formulaire :
+		============================================= */
 	if (Modernizr.geolocation) {
 		console.info('Géolocalisation disponible.');
-
 		// utilise le service fourni par le navigateur
 		navigator.geolocation.watchPosition(
 			// initialise la Google Map avec les coordonnées locales
@@ -72,12 +71,11 @@ $(document).ready(function() {
 		url: '/api/categories',
 		type: 'GET',
 		dataType: 'json',
-		// data: {param1: 'value1'},
 	})
 	.done(function(json) {
-		//console.log(json);
-
-		// Remplissage du form avec des checkboxes pour chaque catégorie principale :
+		/* 
+			Génération dynamique des checkboxes pour chaque catégorie principale :
+		*/
 		$form = $('#rangeCategId');
 		$compteur = 0;
 
@@ -173,8 +171,10 @@ $(document).ready(function() {
 
 
 	// Gestion de la réaction au clic d'une catégorie parent :
-	// Gestion de l'encadré de la catégorie sélectionnée
 	$(document).on('click', 'input[name = "radCategorie"]', function(event) {
+		/*
+			Gestion du style de l'encadré de la catégorie sélectionnée
+		*/
 		// Si il y a une catégorie de sélectionnée, on enlève son style :
 		$('input[type = radio]').parent().removeClass('focused');
 		// on cible la div parent du bouton radio cliqué
@@ -182,6 +182,9 @@ $(document).ready(function() {
 		// on ajoute le style :
 		$categorieFocused.addClass('focused');
 
+		/* 
+			Gestion de l'affichage des sous-catégories
+		*/
 		// Récupération de l'id de la catégorie cliquée :
 		$id_categorie_parent = $('input[name = "radCategorie"]:checked').attr('id');
 
@@ -198,7 +201,7 @@ $(document).ready(function() {
 			// Ajout de toutes les catégories parents dans un bloc
 			// qui apparaît en dessous
 			$elementSub = $('#rangeSubCategId');
-			// on le vide à cahque fois sinon cumulation des sous-catégories
+			// on le vide à chaque fois sinon cumulation des sous-catégories
 			$elementSub.empty();
 
 			// Création du label du select
@@ -207,7 +210,7 @@ $(document).ready(function() {
 			// Création du select
 			$select_sub = $('<select id="selSubCatId" class="form-control" name="selSub" class="form-control">');
 			$option_no_select = $('<option selected disabled>');
-			$option_no_select.append("Sous-type d'événement (facultatif)");
+			$option_no_select.append("Sous-type d'évènement (facultatif)");
 			$select_sub.append($option_no_select);
 
 			$col_sm_10 = $('<div class="col-sm-10">');
@@ -220,7 +223,6 @@ $(document).ready(function() {
 				compteur++;
 
 				$id_categorie_sub = $(json)[index]['id'];
-
 				// création des options du select
 				$option_sub = $('<option value = "' + $id_categorie_sub + '">')
 				$text_option_sub = $(json)[index]['libelle'];
@@ -257,10 +259,9 @@ $(document).ready(function() {
 	});
 
 
-
-	// Gestion des limites calendaires
-	// var $input = $('#inputDateDebutId').pickadate();
-
+	/* ==============================
+	   Gestion des limites calendaires
+	   ============================== */
 	var date_fin_min = '';
 	var time_fin_min = '';
 
@@ -366,6 +367,11 @@ $(document).ready(function() {
 	});
 
 	pickerTimeFin.render(true);
+
+
+	/* ===================================
+		Gestion du bouton "Plus d'options"
+	   =================================== */
 
 	// Gestion du choix d'un formulaire de création d'événement
 	// simplifié ou complet : au clic sur un bouton, on toggle
