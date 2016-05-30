@@ -138,9 +138,8 @@ footer {
 }
 
 
-
 /*
-* Gestion des labels des checkbox de filtrage d'évènement 
+* Gestion des labels des checkbox de filtrage d'évènement
 */
 
 #navbarTriEventId{
@@ -159,7 +158,7 @@ input[type=checkbox]:checked + label {
   color: #FFF;
   background-color: #0091EA;
   border-radius: 5px;
-  padding: 0 10px;
+  padding: 0 0.5em;
   box-shadow: 4px 4px 5px #BDBDBD;
   opacity: 0.9;
 }
@@ -177,6 +176,7 @@ input[type=checkbox] {
   display: none;
 }
 
+
 label.triEventByCategory:hover {
   background-color: #00B0FF;
 }
@@ -186,8 +186,8 @@ input[type=checkbox]:checked + label:hover{
 }
 
 
-/* 
-* Style du bouton burger menu pour le tri des évènements par catégorie 
+/*
+* Style du bouton burger menu pour le tri des évènements par catégorie
 */
 
 #burgerTriId {
@@ -196,11 +196,11 @@ input[type=checkbox]:checked + label:hover{
   border: 0;
 }
 
-#triCategorieId {  
-  display: block;   
-  /*position: absolute;*/
+#triCategorieId {
+/*  position: absolute;*/
+
   text-align: center;
-  
+
   height: 40px;
   width: 100%;
 
@@ -210,7 +210,7 @@ input[type=checkbox]:checked + label:hover{
 
 li.checkbox-inline{
     text-align: center;
-    /*margin-left: 10px;
+/*    margin-left: 10px;
     padding: 0;
     width: 30%;*/
   }
@@ -227,7 +227,7 @@ li.checkbox-inline{
   width: 80%;
 }
 
-/* Gestion du style des labels et des icônes 
+/* Gestion du style des labels et des icônes
  dans le formulaire d'ajout d'évènement */
 
 input[type=radio]:checked + span {
@@ -299,11 +299,8 @@ label{
 
 
 /*  Breakpoint à 767px  */
+/* Gestion pour les tablettes et devices plus petits */
 
-/* 
-* Gestion pour les tablettes
-  et devices plus petits 
-*/
 @media screen and (max-width: 767px) {
   /* gestion du menu */
   li{
@@ -318,6 +315,7 @@ label{
   }
 
   #triCategorieId{
+    position: absolute;
     background-color: rgba(0,0,0,0);
   }
 
@@ -339,9 +337,14 @@ label{
     afin de conserver une homogénéité de présentation
     (tous les labels se mettent sous les icones, en dessous de 768 px)
   */
+
   .glyphicon{
     display: block;
   }
 
+  input[type=checkbox]:checked + label {
+    padding-right: 6em;
+    /*text-align: center;*/
+  }
 
 }
